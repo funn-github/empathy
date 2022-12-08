@@ -70,17 +70,27 @@ let arr = []
 Array.prototype.max = function() {
   return Math.max.apply(null, this);
 };
+Array.prototype.min = function() {
+  return Math.min.apply(null, this);
+};
 
 function getSound(){
 
   const synth = new Tone.Synth().toDestination();
   const melody = []
   const arrlen = arr2[0].length
+  const full = arr2[0].max() + Math.abs(arr2[0].min());
  // alert(arr2.max())
 
   for (let i = 1; i<arrlen; i++){
-    melody.push({ note: "C" + Math.floor((arr2[0][i]/arr2[0].max()) * 10), duration: "8n", timing: i/3 })
+  // alert(eval(Math.abs(arr2[0].min()) + parseInt(arr2[0][i])))
+   console.log("math eval: " + Math.abs(arr2[0].min()))
+   console.log("arr2: " + arr2[0][i])
+  // alert(Math.floor((eval(Math.abs(arr2[0].min()) + parseInt(arr2[0][i]))/full) * 10))
+
+    melody.push({ note: "C" + Math.floor((eval(Math.abs(arr2[0].min()) + parseInt(arr2[0][i]))/full) * 10), duration: "8n", timing: i/3 })
    // alert(arr2[0][i] + " + abd + " + Math.floor((arr2[0][i]/3000) * 10))
+   
 
   }
   
@@ -239,10 +249,7 @@ const styles = {
       <span className="ml-1.5 text-xl text-green-900">Polynomials to Music Converter</span>
     </a>
     <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
-      <a className="mr-5 hover:text-gray-900">1</a>
-      <a className="mr-5 hover:text-gray-900">2</a>
-      <a className="mr-5 hover:text-gray-900">3</a>
-      <a className="mr-5 hover:text-gray-900">4</a>
+      <a href="https://github.com/funn-github/empathy" className="mr-5 hover:text-gray-900">Github</a>
     </nav>
     <button onClick={() => {let x = prompt("Insert Polynomial", "2 * (x ^ 3)"); let amt = prompt("Insert Table Lenght", "20"); solvePoly(x, amt)}} className="inline-flex items-center bg-green-900 py-2 px-4 focus:outline-none hover:bg-green-700 rounded-xl text-green-200 mt-4 md:mt-0">Enter Polynomial
       <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" className="w-4 h-4 ml-1" viewBox="0 0 24 24">
